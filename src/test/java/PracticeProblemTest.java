@@ -1,64 +1,36 @@
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
-import java.io.*;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class PracticeProblemTest {
 
-   @Test
-   public void testOutput()
-   {
-     PrintStream originalOut = System.out;
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     System.setOut(new PrintStream(bos));
+    @Test
+    public void testOutput() {
 
-     // action
-     PracticeProblem.q1();
+        // saving original output
+        PrintStream original = System.out;
 
-     // assertion
-     assertEquals("There once was a man from St. Ives.\n", bos.toString());
+        // capturing output
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
 
-     // undo the binding in System
-     System.setOut(originalOut);
-   }
+        PracticeProblem.q1();
 
-   @Test
-   public void testInputandOutput()
-   {
-      String data = "Users Input";
-      System.setIn(new ByteArrayInputStream(data.getBytes()));
-      
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
+        // checking if it matches
+        assertEquals("There once was a man from St. Ives.\n", out.toString());
 
-      // action
-      PracticeProblem.q1();
+        // set back to normal
+        System.setOut(original);
+    }
 
-      // assertion
-      assertEquals("There once was a man from St. Ives.\n", bos.toString());
+    @Test
+    public void testIsEven() {
 
-      // undo the binding in System
-      System.setOut(originalOut);
-   }
-
-   @Test
-   public void testQ3()
-   {
-     
-   }
-
-   @Test
-   @DisplayName("")
-   void isEvenTest1() {
-      Class<?> testClass = PracticeProblem.class;
-      try {
-         Class[] cArg = { int.class };
-         Method method = testClass.getDeclaredMethod("isEven", cArg);
-         assertEquals(true, (boolean) method.invoke(null, 4));
-      } catch (NoSuchMethodException e) {
-         fail("Method does not exist");
-      } catch (Exception e) {
-         fail("Something weird happened: " + e);
-      }
-   }
+        // simple checks
+        assertEquals(true, PracticeProblem.isEven(4));
+        assertEquals(false, PracticeProblem.isEven(5));
+        assertEquals(true, PracticeProblem.isEven(0));
+    }
 }
