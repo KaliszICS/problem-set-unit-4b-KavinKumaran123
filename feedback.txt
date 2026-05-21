@@ -1,0 +1,10 @@
+K(30%): 100%
+I(30%): 99%
+C(10%): 30%
+A(30%): 96%
+
+91.5% of 90 - 82.35%
+
+Misisng javadocs and comments.
+fillFrom should loop through the tiles if there aren't enough to fill the board.
+Missing period at the end of toString method for tileStack.
